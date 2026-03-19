@@ -104,8 +104,16 @@ export default function GuitarProViewer({ fileData, fileName }: { fileData: Arra
         });
 
         initApi.renderFinished.on(() => {
-           if (isMounted) addLog("✅ Render Finished");
+          if (isMounted) addLog("✅ Render Finished");
         });
+
+        const handleResize = () => {
+          if (apiRef.current) {
+            apiRef.current.update();
+          }
+        };
+        window.addEventListener('resize', handleResize);
+        apiRef.current = initApi;
 
         setTimeout(() => {
           if (!isMounted) return;
@@ -116,17 +124,20 @@ export default function GuitarProViewer({ fileData, fileName }: { fileData: Arra
             addError("Load failed", loadErr);
           }
         }, 500); 
-        
-        apiRef.current = initApi;
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
       } catch (err: any) {
         addError("Init failed", err);
       }
     };
 
-    startAlphaTab();
+    const cleanupResize = startAlphaTab();
 
     return () => {
       isMounted = false;
+      if (cleanupResize) cleanupResize();
       if (apiRef.current) {
         apiRef.current.destroy();
         apiRef.current = null;
