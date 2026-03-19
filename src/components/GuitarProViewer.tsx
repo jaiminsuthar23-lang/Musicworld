@@ -227,7 +227,17 @@ export default function GuitarProViewer({ fileData, fileName }: { fileData: Arra
             className={`p-2.5 rounded-xl border transition-all ${isMetronomeActive ? 'bg-violet-600/30 border-violet-500 text-violet-400' : 'bg-white/5 border-white/10 text-white/40 hover:text-white/60'}`}
             title="Metronome"
           >
-            <BellRing className="w-5 h-5" />
+            <svg 
+              viewBox="0 0 24 24" 
+              className={`w-5 h-5 fill-none stroke-current stroke-2 transition-all ${isMetronomeActive ? 'animate-pulse' : ''}`}
+            >
+              <path d="M12 2L5 22h14L12 2z" />
+              <path 
+                d="M12 18l-3-9" 
+                className={isMetronomeActive ? "origin-[12px_18px] animate-[metronome-swing_1s_ease-in-out_infinite]" : ""}
+              />
+              <circle cx="12" cy="18" r="1.5" className="fill-current" />
+            </svg>
           </button>
           
           <button 

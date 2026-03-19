@@ -71,3 +71,9 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes metronome-swing {
+  0% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(-30deg); }
+}
