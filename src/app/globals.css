@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f0c29;
+  --foreground: #f8fafc;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  --color-accent: #8b5cf6;
+  --color-accent-hover: #7c3aed;
+  
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: var(--foreground);
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-attachment: fixed;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* AlphaTab Premium Cursor Styling */
+.at-cursor-bar {
+  background: rgba(139, 92, 246, 0.15) !important; /* Soft Violet for measure */
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.at-cursor-beat {
+  background: rgba(255, 215, 0, 0.8) !important; /* Gold line for beat */
+  width: 2px !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.at-highlight * {
+  fill: #8b5cf6 !important; /* Highlighted notes in violet */
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s var(--ease-spring) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
